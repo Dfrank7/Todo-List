@@ -19,16 +19,13 @@ import android.widget.Toast;
 
 import com.example.dfrank.todo_list.MainActivity;
 import com.example.dfrank.todo_list.R;
-import com.example.dfrank.todo_list.adapter.TodoAdapter;
 import com.example.dfrank.todo_list.data.TodoContract;
-import com.example.dfrank.todo_list.data.TodoHelper;
 import com.example.dfrank.todo_list.data.TodoProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.ContentValues.TAG;
-import static com.example.dfrank.todo_list.MainActivity.TASK_LOADER_ID;
+
 
 /**
  * Created by dfrank on 3/14/18.
@@ -51,7 +48,7 @@ public class Dialog extends DialogFragment {
     @Override
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.addtask,null);
         builder.setTitle("Add Todo");
         setCancelable(false);
@@ -68,7 +65,8 @@ public class Dialog extends DialogFragment {
                 addTask();
                 String input = task.getText().toString();
                 if (input.isEmpty()) {
-                    Toast.makeText(getActivity(), "Please Enter a task", Toast.LENGTH_SHORT).show();
+                    setCancelable(false);
+                    Toast.makeText(getActivity(), "Please Fill the appropriate fields", Toast.LENGTH_SHORT).show();
                 } else {
                     ContentValues cv = new ContentValues();
                     cv.put(TodoContract.TodoEntry.task, input);

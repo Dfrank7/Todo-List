@@ -1,11 +1,12 @@
 package com.example.dfrank.todo_list.adapter;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dfrank.todo_list.R;
+import com.example.dfrank.todo_list.UpdateAcitivity;
 import com.example.dfrank.todo_list.data.TodoContract;
+import com.example.dfrank.todo_list.data.TodoProvider;
 import com.example.dfrank.todo_list.fragment.Dialog;
 
 import butterknife.BindView;
@@ -119,8 +122,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.viewHolder>{
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if (position!=RecyclerView.NO_POSITION){
-//                        Intent intent = new Intent(context, Dialog.class);
-//                        view.getContext().startActivity(intent);
+                        Uri currentTodoUri = ContentUris.withAppendedId(TodoProvider.content_provider2,position);
+                        Intent intent = new Intent(view.getContext(), UpdateAcitivity.class)
+                                .setData(currentTodoUri);
+                        view.getContext().startActivity(intent);
                     }
                 }
             });

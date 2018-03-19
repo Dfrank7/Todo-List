@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         }).attachToRecyclerView(recyclerView);
 
+
+
     }
 
 //    private void Undo(){
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 //            }
 //        })
 //    }
-
 
 
     @Override
@@ -131,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
         builder.show();
     }
+
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
